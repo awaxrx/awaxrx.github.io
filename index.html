@@ -3,38 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello Page</title>
-    <style>
-        .popup {
-            display: none;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        .popup.show {
-            display: block;
-        }
-        .popup button {
-            margin-top: 10px;
-        }
-    </style>
+    <title>SQL Injection Test</title>
 </head>
 <body>
-    <div class="popup" id="popup">
-        <p>Hello!</p>
-        <button onclick="closePopup()">Close</button>
-    </div>
+    <h1>SQL Injection Test</h1>
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <button type="button" onclick="testSqlInjection()">Submit</button>
+    </form>
+
     <script>
-        window.onload = function() {
-            document.getElementById('popup').classList.add('show');
+        function testSqlInjection() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            console.log("Injected Username: " + username);
+            console.log("Injected Password: " + password);
+            alert("Testing SQL Injection with:\nUsername: " + username + "\nPassword: " + password);
         }
-        function closePopup() {
-            document.getElementById('popup').classList.remove('show');
-        }
+
+        // Automatically fill in the fields with the SQL injection string
+        document.getElementById('username').value = "' OR '1'='1";
+        document.getElementById('password').value = "' OR '1'='1";
     </script>
 </body>
 </html>
