@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Clickjacking PoC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .legit-container {
+            position: relative;
+            display: inline-block;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid #ccc;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        .legit-button {
+            padding: 10px 20px;
+            font-size: 20px;
+            background: #0078D4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .hidden-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 0, 0, 0.2);
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .fake-captcha {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .hidden-overlay.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Security Awareness Clickjacking PoC</h1>
+    <p>Hover over the button to see what happens...</p>
+    
+    <div class="legit-container" id="clickTarget">
+        <button class="legit-button">Click Me</button>
+        <div class="hidden-overlay" id="hiddenLayer"></div>
+    </div>
+    
+    <p class="fake-captcha">Please verify you are human: <input type="checkbox" id="fakeCheck"> I am not a robot</p>
+    
+    <script>
+        document.getElementById("clickTarget").addEventListener("mouseenter", function() {
+            let overlay = document.getElementById("hiddenLayer");
+            overlay.classList.add("active");
+            setTimeout(() => overlay.classList.remove("active"), 1000); // Flash visibility
+        });
+        
+        document.getElementById("fakeCheck").addEventListener("change", function() {
+            alert("Verified! (Actually, that was fake)");
+        });
+    </script>
+</body>
+</html>
+
