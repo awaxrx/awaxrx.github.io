@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Buffalo Chip URL Vulnerability Demo</title>
+  <style>
+    body {
+      background: url('https://www.buffalochip.com/wp-content/uploads/sbc-who-will-the-headliners-be-946x463.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #ffcc00;
+      color: #000;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 6px;
+      box-shadow: 0 0 10px #ffcc00;
+      transition: 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #ffe866;
+      box-shadow: 0 0 20px #ffcc00;
+    }
+
+    .note {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>URL Path Vulnerability Demo</h1>
+    <p>This demonstrates how <strong>any injected path</strong> like <code>/bugz4</code> is incorrectly routed.</p>
+    <button onclick="window.open('https://www.buffalochip.com/bugz4', '_blank')">Test Bugz4 Path</button>
+    <div class="note">This opens a live page showing the vulnerability in action.</div>
+  </div>
+</body>
+</html>
