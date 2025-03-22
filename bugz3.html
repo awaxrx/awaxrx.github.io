@@ -1,30 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Buffalo Chip Iframe Exploit Demo</title>
+  <meta charset="UTF-8">
+  <title>Buffalo Chip Vulnerability Demo</title>
   <style>
-    iframe {
-      width: 100%;
-      height: 90vh;
-      border: none;
-      filter: blur(1.5px);
-    }
-    .btn {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: #cc0000;
+    body {
+      background: url('https://www.buffalochip.com/wp-content/uploads/sbc-who-will-the-headliners-be-946x463.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
       color: white;
-      padding: 10px 20px;
-      font-weight: bold;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #ffcc00;
+      color: #000;
       border: none;
-      border-radius: 5px;
-      font-size: 16px;
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 6px;
+      box-shadow: 0 0 10px #ffcc00;
+      transition: 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #ffe866;
+      box-shadow: 0 0 20px #ffcc00;
+    }
+
+    .note {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
-  <button class="btn">This is a spoofed page</button>
-  <iframe src="https://www.buffalochip.com/"></iframe>
+  <div class="overlay">
+    <h1>CloudyDay Security Assessment</h1>
+    <p>Click below to view the live vulnerable URL path demonstration.</p>
+    <button onclick="window.location.href='https://www.buffalochip.com/bugz3'">Launch Vulnerability Test</button>
+    <div class="note">(Redirects to live page with vulnerable behavior)</div>
+  </div>
 </body>
 </html>
