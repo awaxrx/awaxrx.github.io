@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Chat Injection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        iframe {
+            width: 90%;
+            height: 600px;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        function injectScript() {
+            let script = document.createElement("script");
+            script.src = "https://support.microsoft.com/en-us/answerdesk/chat";
+            document.body.appendChild(script);
+        }
+
+        function fetchAndInject() {
+            fetch("https://support.microsoft.com/en-us/answerdesk/chat")
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById("chatContainer").innerHTML = html;
+                })
+                .catch(err => console.error("Blocked:", err));
+        }
+    </script>
+</head>
+<body>
+    <h1>Microsoft Chat Embedding Test</h1>
+
+    <h2>1️⃣ IFrame Embed Attempt</h2>
+    <iframe src="https://support.microsoft.com/en-us/answerdesk/chat"></iframe>
+
+    <h2>2️⃣ JavaScript Injection</h2>
+    <button onclick="injectScript()">Inject Chat Script</button>
+
+    <h2>3️⃣ Fetch and Inject</h2>
+    <button onclick="fetchAndInject()">Load Chat Dynamically</button>
+    <div id="chatContainer"></div>
+
+</body>
+</html>
