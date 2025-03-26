@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AWS Login Clone - PoC</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4fefe;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-box {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .login-box img {
+      max-width: 150px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      color: #232f3e;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #0073bb;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005f9e;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: gray;
+    }
+
+    .external-link::after {
+      display: inline-flex;
+      content: url('https://a0.awsstatic.com/image/privatelink/external-link-icon-blue.svg');
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <img src="https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png" alt="AWS Logo">
+    <h2>Sign-In</h2>
+    <form action="#">
+      <input type="text" placeholder="Email (root or IAM user)" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit">Sign In</button>
+    </form>
+    <div class="footer">
+      AWS Login Clone for PoC Testing Only<br/>
+      <a href="https://aws.amazon.com/security" target="_blank" class="external-link">AWS Security Info</a>
+    </div>
+  </div>
+</body>
+</html>
