@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS Sign-In</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #eef7f9;
+      font-family: "Amazon Ember", "Helvetica Neue", Arial, sans-serif;
+    }
+    .signin-box {
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .signin-header {
+      font-size: 18px;
+      font-weight: bold;
+      color: #0073bb;
+      margin-bottom: 10px;
+    }
+    .signin-instruction {
+      font-size: 14px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    button {
+      background-color: #0073bb;
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+    .note {
+      color: red;
+      font-size: 12px;
+      position: absolute;
+      top: 5px;
+      left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="note">[+] Simulating U2F Request...</div>
+  <div class="signin-box">
+    <div class="signin-header">Sign in using your security key</div>
+    <div class="signin-instruction">Insert your security key and touch it when prompted.</div>
+    <button onclick="simulateU2F()">Continue</button>
+  </div>
+
+  <script>
+    function simulateU2F() {
+      document.body.style.opacity = 0.7;
+      console.log("Timestamp: " + new Date().toISOString());
+      console.log("Platform: " + navigator.platform);
+      console.log("User Agent: " + navigator.userAgent);
+      console.log("Language: " + navigator.language);
+
+      setTimeout(() => {
+        alert("Security key not detected. Please insert and try again.");
+      }, 3000);
+
+      console.log("[+] User clicked 'Continue'");
+
+      if (window.u2f) {
+        try {
+          window.u2f.sign(
+            "https://signin.aws.amazon.com",
+            "randomChallengeData123",
+            [{ version: "U2F_V2", keyHandle: "keyHandleXYZ" }],
+            function(response) {
+              console.log("Simulated U2F Response:", response);
+            }
+          );
+        } catch (err) {
+          console.warn("Simulated U2F error:", err);
+        }
+      }
+    }
+
+    setTimeout(() => {
+      console.log("[*] U2F Auto Init Triggered");
+    }, 1000);
+  </script>
+</body>
+</html>
