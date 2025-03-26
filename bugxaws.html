@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS Sign-In</title>
+  <style>
+    body {
+      background-color: #f2f9f9;
+      font-family: Arial, sans-serif;
+    }
+    .aws-container {
+      width: 340px;
+      margin: 80px auto;
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 6px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .aws-container img {
+      width: 160px;
+      margin-bottom: 20px;
+    }
+    .aws-container h2 {
+      margin-bottom: 20px;
+      font-size: 22px;
+      color: #232f3e;
+    }
+    .aws-container input[type="text"],
+    .aws-container input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .aws-container button {
+      background-color: #0073bb;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 4px;
+      margin-top: 15px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .aws-container button:hover {
+      background-color: #005fa3;
+    }
+    .aws-footer {
+      margin-top: 15px;
+      font-size: 11px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="aws-container">
+    <img src="https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png" alt="AWS Logo">
+    <h2>Sign-In</h2>
+    <input type="text" placeholder="Email (root or IAM user)">
+    <input type="password" placeholder="Password">
+    <button>Sign In</button>
+    <div class="aws-footer">AWS Login Clone for PoC Testing Only</div>
+  </div>
+</body>
+</html>
