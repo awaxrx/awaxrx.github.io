@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS Login Replay Test</title>
+  <style>
+    body {
+      background: #f1f1f1;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 40px;
+    }
+    .btn {
+      display: inline-block;
+      background: #232f3e;
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 10px;
+      font-size: 16px;
+    }
+    .btn:hover {
+      background: #37475a;
+    }
+  </style>
+</head>
+<body>
+  <h2>AWS Login Simulation</h2>
+  <div id="buttons"></div>
+
+  <script>
+    const destinations = [
+      "https://console.aws.amazon.com/support/home",
+      "https://us-east-1.console.aws.amazon.com/billing/home",
+      "https://us-west-2.console.aws.amazon.com/ec2/v2/home",
+      "https://us-east-1.console.aws.amazon.com/iamv2/home",
+      "https://console.aws.amazon.com/s3/home"
+    ];
+
+    function randomString(length = 16) {
+      return Math.random().toString(36).substring(2, 2 + length);
+    }
+
+    function buildURL(destination) {
+      const state = randomString(12);
+      return `https://signin.aws.amazon.com/federation?Action=login&Destination=${encodeURIComponent(destination)}&SigninToken=REPLACE_WITH_VALID_TOKEN&state=${state}`;
+    }
+
+    const container = document.getElementById("buttons");
+    destinations.forEach(dest => {
+      const a = document.createElement("a");
+      a.className = "btn";
+      a.textContent = `Go to ${new URL(dest).pathname.split('/')[1] || 'Home'}`;
+      a.href = buildURL(dest);
+      container.appendChild(a);
+    });
+  </script>
+</body>
+</html>
