@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+  <title>M365 Tiles Emulator</title>
+  <style>
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: monospace;
+      text-align: center;
+    }
+    iframe {
+      width: 240px;
+      height: 160px;
+      border: 1px solid #0f0;
+      margin: 3px;
+      background: #111;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>M365 Tile Grid - Loop Running</h2>
+  <div id="timestamp"></div>
+  <div class="container" id="tiles"></div>
+
+  <script>
+    const urls = [
+      "https://news.microsoft.com",
+      "https://login.microsoftonline.com",
+      "https://portal.office.com",
+      "https://entra.microsoft.com",
+      "https://mfa.microsoft.com",
+      "https://myapplications.microsoft.com",
+      "https://admin.microsoft.com",
+      "https://outlook.office365.com",
+      "https://security.microsoft.com",
+      "https://compliance.microsoft.com",
+      "https://teams.microsoft.com",
+      "https://graph.microsoft.com",
+      "https://www.office.com",
+      "https://login.microsoftonline.us",
+      "https://aad.portal.azure.com"
+    ];
+
+    function loadTiles() {
+      const container = document.getElementById("tiles");
+      container.innerHTML = "";
+      for (let i = 0; i < 100; i++) {
+        const iframe = document.createElement("iframe");
+        const url = urls[Math.floor(Math.random() * urls.length)];
+        iframe.src = url + "?ts=" + Date.now();
+        container.appendChild(iframe);
+      }
+      document.getElementById("timestamp").innerText = "Refreshed: " + new Date().toISOString();
+    }
+
+    loadTiles();
+    setInterval(loadTiles, 60000); // every 60 seconds
+  </script>
+</body>
+</html>
