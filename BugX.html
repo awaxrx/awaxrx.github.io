@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buffalo Chip Wildcard Exploit Demo</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    iframe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      filter: blur(2px); /* Reduced blur for visibility */
+    }
+
+    .overlay {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 0, 0, 0.75);
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      z-index: 100;
+    }
+
+    .overlay h1 {
+      margin: 0 0 1rem;
+      font-size: 2rem;
+    }
+
+    .overlay p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .exploit-btn {
+      background-color: #ffd600;
+      color: #000;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .exploit-btn:hover {
+      background-color: #ffca28;
+    }
+  </style>
+</head>
+<body>
+  <iframe src="https://www.buffalochip.com/"></iframe>
+  <div class="overlay">
+    <h1>Buffalo Chip Wildcard Vulnerability</h1>
+    <p>This demo shows how <strong>any</strong> URL like <code>/bug</code> loads the full homepage — opening risk to phishing or iframe-based attacks.</p>
+    <button class="exploit-btn" onclick="alert('This could be used in a real attack vector if not mitigated.')">
+      View Exploit Path
+    </button>
+  </div>
+</body>
+</html>
