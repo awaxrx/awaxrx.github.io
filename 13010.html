@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Port 13010 - Microsoft News Grid</title>
+  <meta charset="UTF-8">
+  <style>
+    body { background: black; color: #0f0; font-family: monospace; margin: 0; }
+    .container { display: flex; flex-wrap: wrap; justify-content: center; padding: 10px; }
+    iframe { width: 240px; height: 160px; margin: 4px; border: 1px solid lime; background: #111; }
+  </style>
+  <script>
+    const urls = [
+      "https://news.microsoft.com",
+      "https://news.microsoft.com/en-us/features/",
+      "https://news.microsoft.com/stories/",
+      "https://news.microsoft.com/bythenumbers/"
+    ];
+
+    function generateIframes() {
+      const container = document.getElementById("container");
+      container.innerHTML = "";
+      for (let i = 0; i < 100; i++) {
+        const iframe = document.createElement("iframe");
+        iframe.src = urls[Math.floor(Math.random() * urls.length)];
+        iframe.sandbox = "allow-scripts allow-popups allow-top-navigation-by-user-activation";
+        container.appendChild(iframe);
+      }
+    }
+
+    setInterval(generateIframes, 60000);
+    window.onload = generateIframes;
+  </script>
+</head>
+<body>
+  <div style="padding:10px;">Last Refresh: <span id="time"></span></div>
+  <div class="container" id="container"></div>
+  <script>
+    function updateTime() {
+      document.getElementById("time").textContent = new Date().toISOString();
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
+</body>
+</html>
