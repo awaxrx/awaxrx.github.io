@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ICOMiner Withdrawal Test</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2em;
+      background: #111;
+      color: #0f0;
+    }
+    button, select {
+      padding: 10px 20px;
+      font-size: 1em;
+      margin-top: 1em;
+      margin-right: 1em;
+    }
+    pre {
+      background: #222;
+      padding: 1em;
+      margin-top: 1em;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>ICOMiner Endpoint Trigger Tester</h1><label for="endpoint">Choose Endpoint:</label> <select id="endpoint"> <option value="https://icominer.org/api/request_withdrawal">/api/request_withdrawal</option> <option value="https://icominer.org/api/get_balance">/api/get_balance</option> <option value="https://icominer.org/api/contract_status">/api/contract_status</option> <option value="https://icominer.org/api/activate_plan">/api/activate_plan</option> <option value="https://icominer.org/api/bonus_rewards">/api/bonus_rewards</option> </select>
+
+<button onclick="triggerEndpoint()">Test Selected Endpoint</button>
+
+  <pre id="response">Waiting for request...</pre>  <script>
+    async function triggerEndpoint() {
+      document.getElementById('response').textContent = 'Sending request...';
+      const endpoint = document.getElementById('endpoint').value;
+
+      const payload = {
+        user_id: "test_user",
+        amount: "100",
+        wallet_address: "TRXxxxxxxxxxxx",
+        token: "test_token"
+      };
+
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const resultText = await res.text();
+        try {
+          const json = JSON.parse(resultText);
+          document.getElementById('response').textContent = JSON.stringify(json, null, 2);
+        } catch {
+          document.getElementById('response').textContent = resultText;
+        }
+      } catch (err) {
+        document.getElementById('response').textContent = 'Error: ' + err;
+      }
+    }
+  </script></body>
+</html>
