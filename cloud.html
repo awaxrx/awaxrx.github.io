@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Replay Test Using Fetch</title>
+</head>
+<body>
+    <h1>Login Replay Test Using Fetch</h1>
+    <button id="logoutBtn">Test Logout Flow</button>
+    <pre id="output"></pre>
+
+    <script>
+        // This function ensures that the DOM is ready before adding event listeners
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                testLogoutFlow();
+            });
+        });
+
+        async function testLogoutFlow() {
+            const logoutUrl = "https://login.test.usajobs.gov/Account/LoggedOut?logoutId=CfDJ8I7qWQaFjSdKiNq7tO0V4lInKMLGrnrgbcbw6lHKDR9PnpyndLRONMabeSWl...";  // Replace with the actual logout URL
+            const headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                "Referer": "https://test.usajobs.gov"
+            };
+
+            try {
+                const response = await fetch(logoutUrl, {
+                    method: 'GET',
+                    headers: headers,
+                    credentials: 'include',  // Ensure cookies are sent with the request
+                    redirect: 'follow'  // Follow redirects
+                });
+
+                const finalUrl = response.url;
+                const cookies = document.cookie; // Capture cookies directly
+                const status = response.status;
+
+                const output = document.getElementById('output');
+                output.textContent = `Logout Flow Complete:
+                \nStatus: ${status}
+                \nFinal Redirected URL: ${finalUrl}
+                \nCookies: ${cookies}`;
+            } catch (error) {
+                console.error('Error during logout flow:', error);
+                const output = document.getElementById('output');
+                output.textContent = "An error occurred: " + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
